@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday My Love ❤️</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(120deg, #fde2e4, #e0f4ff);
+  overflow: hidden;
+}
+
+/* sparkles */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float 8s infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.hidden { display: none; }
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+  font-family: inherit;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #ffb3c6;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  border-radius: 15px;
+  animation: fade 1.5s;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quote {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.heart {
+  position: fixed;
+  font-size: 24px;
+  animation: pop 4s linear;
+}
+
+@keyframes pop {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- sparkles -->
+<script>
+for(let i=0;i<30;i++){
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDelay=Math.random()*8+"s";
+  document.body.appendChild(s);
+}
+</script>
+
+<div class="container">
+  <div class="card" id="lock">
+    <h2>🔐 Enter the secret</h2>
+    <p>The word I call you when I’m romantically mad at you 💖</p>
+    <input id="pass" placeholder="hint 😉" />
+    <button onclick="unlock()">Unlock 💝</button>
+  </div>
+
+  <div class="card hidden" id="show">
+    <h2>Happy Birthday My Love 🎂</h2>
+    <img id="slide" src="photo1.jpg">
+    <div class="quote" id="quote"></div>
+  </div>
+</div>
+
+<audio id="music" src="song.mp3"></audio>
+
+<script>
+const photos = [
+  {src:"photo1.jpg", text:"You are my safest place 🤍"},
+  {src:"photo2.jpg", text:"Every version of me loves you"},
+  {src:"photo3.jpg", text:"You feel like home, always"},
+  {src:"photo4.jpg", text:"Forever sounds perfect with you"}
+];
+
+let i=0;
+
+function unlock(){
+  const p=document.getElementById("pass").value.toLowerCase().trim();
+  if(p==="shona cokkie"){
+    document.getElementById("lock").classList.add("hidden");
+    document.getElementById("show").classList.remove("hidden");
+    document.getElementById("music").play();
+    setInterval(slideShow,3000);
+    hearts();
+  } else {
+    alert("Try again 😌");
+  }
+}
+
+function slideShow(){
+  i=(i+1)%photos.length;
+  document.getElementById("slide").src=photos[i].src;
+  document.getElementById("quote").innerText=photos[i].text;
+}
+
+function hearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
+}
+</script>
+
+</body>
+</html>
